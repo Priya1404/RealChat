@@ -9,8 +9,17 @@ import Foundation
 import Combine
 import Network
 
+protocol WebSocketTaskProtocol {
+    func resume()
+    func cancel(with closeCode: URLSessionWebSocketTask.CloseCode, reason: Data?)
+    func send(_ message: URLSessionWebSocketTask.Message, completionHandler: @escaping (Error?) -> Void)
+    func sendPing(pongReceiveHandler: @escaping (Error?) -> Void)
+    func receive(completionHandler: @escaping (Result<URLSessionWebSocketTask.Message, Error>) -> Void)
+}
+
 class WebSocketService: ObservableObject {
-    private var webSocket: URLSessionWebSocketTask?
+    var webSocket: WebSocketTaskProtocol?
+
     private var cancellables = Set<AnyCancellable>()
     private let baseURL = "wss://demo.piesocket.com/v3/channel_1?api_key=VCXCEuvhGcBDP7XhiJJUDvR1e1D3eiVjgZ9VRiaV"
     private var isConnecting = false
@@ -64,7 +73,7 @@ class WebSocketService: ObservableObject {
         }
         
         let session = URLSession(configuration: .default)
-        webSocket = session.webSocketTask(with: url)
+        webSocket = session.webSocketTask(with: url) as WebSocketTaskProtocol
         webSocket?.resume()
         
         startPingTimer()
@@ -236,3 +245,13 @@ class WebSocketService: ObservableObject {
         }
     }
 }
+
+extension URLSessionWebSocketTask: WebSocketTaskProtocol {}
+
+protocol NetworkMonitorProtocol {
+    var pathUpdateHandler: ((NWPath) -> Void)? { get set }
+    func start(queue: DispatchQueue)
+}
+
+extension NWPathMonitor: NetworkMonitorProtocol {}
+

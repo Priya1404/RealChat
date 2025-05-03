@@ -33,11 +33,6 @@ struct ContentView: View {
                         ChatDetailView(viewModel: viewModel)
                     }
                 }
-//                .onChange(of: showingNewChat) { newValue in
-//                    if newValue {
-//                        showingChatDetail = true
-//                    }
-//                }
         }
         .onAppear { viewModel.connect() }
         .onDisappear { viewModel.disconnect() }
@@ -70,8 +65,6 @@ struct ContentView: View {
             Image(systemName: "square.and.pencil")
         }
     }
-
-
     
     private var offlineView: some View {
         VStack(spacing: 20) {
