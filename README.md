@@ -68,6 +68,12 @@ The application follows the MVVM (Model-View-ViewModel) architecture pattern wit
 
 The project includes unit tests for core functionality and UI tests for critical user flows.
 
-## License
+## WebSocket URL Used
 
-MIT License
+wss://demo.piesocket.com/v3/channel_1?api_key=VCXCEuvhGcBDP7XhiJJUDvR1e1D3eiVjgZ9VRiaV
+
+## Few Screenshots of the app
+
+![Simulator Screenshot - iPhone 16 Pro - 2025-05-04 at 03 17 00](https://github.com/user-attachments/assets/87f2bb4c-a9c9-4bcb-9518-3f5bf7a22d5a)
+![Simulator Screenshot - iPhone 16 Pro - 2025-05-04 at 03 17 03](https://github.com/user-attachments/assets/457c1913-de52-4d14-bdac-b9a2c99de837)
+![Simulator Screenshot - iPhone 16 Pro - 2025-05-03 at 09 54 44](https://github.com/user-attachments/assets/6c694b29-1eca-4cba-b92c-ce9ec04d34cd)
